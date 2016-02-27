@@ -1,0 +1,25 @@
+{
+  "name": "plex-sync",
+  "description": "sync",
+  "main": "index.html",
+  "authors": [
+    "Oren Griffin <oren.griffin@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io": "^1.4.5",
+    "lodash": "^4.5.1",
+    "zepto": "^1.1.6"
+  }
+}
