@@ -5,32 +5,34 @@ module.exports = (socket) ->
   socket.emit 'news', hello: 'world'
 
   socket.on 'sync',  (data) ->
-    ls = spawn('ls', ['-lh', '/usr'])
+    sync = spawn('acd_cli', ['sync'])
 
-    ls.stdout.on 'data', (data) ->
+    sync.stdout.on 'data', (data) ->
       socket.emit 'answer', data.toString()
       console.log "stdout: #{data}"
 
-    ls.stderr.on 'data', (data) ->
+    sync.stderr.on 'data', (error) ->
+      socket.emit 'error', error
       console.log "stderr: #{data}"
 
-    ls.on 'close', (code) ->
-      socket.emit 'sync-answer-done', data
+    sync.on 'close', (code) ->
+      socket.emit 'done', 'done'
       console.log "child process exited with code #{code}"
 
     # console.log data
   socket.on 'move-done-torrents',  (data) ->
-    ls = spawn 'move-done-torrents.sh'
+    move = spawn 'move-done-torrents.sh'
 
-    ls.stdout.on 'data', (data) ->
+    move.stdout.on 'data', (data) ->
       socket.emit 'answer', data.toString()
       console.log "stdout: #{data}"
 
-    ls.stderr.on 'data', (data) ->
+    move.stderr.on 'data', (error) ->
+      socket.emit 'error', error
       console.log "stderr: #{data}"
 
-    ls.on 'close', (code) ->
-      socket.emit 'sync-answer-done', data
+    move.on 'close', (code) ->
+      socket.emit 'done', 'done'
       console.log "child process exited with code #{code}"
 
     # console.log data

@@ -10,32 +10,34 @@
       hello: 'world'
     });
     socket.on('sync', function(data) {
-      var ls;
-      ls = spawn('ls', ['-lh', '/usr']);
-      ls.stdout.on('data', function(data) {
+      var sync;
+      sync = spawn('acd_cli', ['sync']);
+      sync.stdout.on('data', function(data) {
         socket.emit('answer', data.toString());
         return console.log("stdout: " + data);
       });
-      ls.stderr.on('data', function(data) {
+      sync.stderr.on('data', function(error) {
+        socket.emit('error', error);
         return console.log("stderr: " + data);
       });
-      return ls.on('close', function(code) {
-        socket.emit('sync-answer-done', data);
+      return sync.on('close', function(code) {
+        socket.emit('done', 'done');
         return console.log("child process exited with code " + code);
       });
     });
     return socket.on('move-done-torrents', function(data) {
-      var ls;
-      ls = spawn('move-done-torrents.sh');
-      ls.stdout.on('data', function(data) {
+      var move;
+      move = spawn('move-done-torrents.sh');
+      move.stdout.on('data', function(data) {
         socket.emit('answer', data.toString());
         return console.log("stdout: " + data);
       });
-      ls.stderr.on('data', function(data) {
+      move.stderr.on('data', function(error) {
+        socket.emit('error', error);
         return console.log("stderr: " + data);
       });
-      return ls.on('close', function(code) {
-        socket.emit('sync-answer-done', data);
+      return move.on('close', function(code) {
+        socket.emit('done', 'done');
         return console.log("child process exited with code " + code);
       });
     });

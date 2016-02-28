@@ -14,21 +14,38 @@
     body {
         font-size: 0.8em;
     }
+    .errors {
+      color: red;
+    }
 
-    /* Specific checkbox widget styles */
-    .ui-checkbox {
-        font-size: 0.75em;
-        margin: 0.6em;
+    #status {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left 0;
     }
 </style>
+
+<input>
+</input>
+
+<button id="connect">connect</button>
 
 <button id="sync">sync</button>
 
 <button id="move">move</button>
+<button id="clear">clear</button>
 
 <div class="content">
   <ul>
   </ul>
+</div>
+<div class="errors">
+  <ul>
+  </ul>
+</div>
+<div id="status">
+  Recieving ...
 </div>
 </body>
 </html>
