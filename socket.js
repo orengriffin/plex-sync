@@ -27,7 +27,7 @@
     });
     return socket.on('move-done-torrents', function(data) {
       var move;
-      move = spawn('move-done-torrents.sh');
+      move = spawn('./move-done-torrents.sh');
       move.stdout.on('data', function(data) {
         socket.emit('answer', data.toString());
         return console.log("stdout: " + data);

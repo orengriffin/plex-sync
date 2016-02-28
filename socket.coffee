@@ -21,7 +21,7 @@ module.exports = (socket) ->
 
     # console.log data
   socket.on 'move-done-torrents',  (data) ->
-    move = spawn 'move-done-torrents.sh'
+    move = spawn './move-done-torrents.sh'
 
     move.stdout.on 'data', (data) ->
       socket.emit 'answer', data.toString()
