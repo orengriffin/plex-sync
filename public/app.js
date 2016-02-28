@@ -13,8 +13,11 @@
       socket.on('done', function() {
         return status.hide();
       });
-      return socket.on('error', function(error) {
+      socket.on('error', function(error) {
         return errorUl.append(li(error));
+      });
+      return socket.on('answer', function(answer) {
+        return ul.append(liPre(answer));
       });
     };
     ul = $('.content ul');
@@ -33,11 +36,8 @@
     });
     $('#sync').click(function() {
       status.show();
-      socket.emit('sync', {
+      return socket.emit('sync', {
         data: 'syncing'
-      });
-      return socket.on('answer', function(answer) {
-        return ul.append(liPre(answer));
       });
     });
     $('#move').click(function() {

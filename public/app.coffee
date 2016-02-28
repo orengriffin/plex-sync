@@ -7,6 +7,8 @@ $ ->
   init = ->
     socket.on 'done', -> status.hide()
     socket.on 'error', (error) -> errorUl.append li(error)
+    socket.on 'answer', (answer) ->
+      ul.append liPre(answer)
 
   ul = $('.content ul')
   errorUl = $(".errors ul")
@@ -25,8 +27,6 @@ $ ->
   $('#sync').click ->
     status.show()
     socket.emit 'sync', data: 'syncing'
-    socket.on 'answer', (answer) ->
-      ul.append liPre(answer)
 
   $('#move').click ->
     status.show()
