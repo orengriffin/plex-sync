@@ -17,7 +17,7 @@
     $('#connect').click(function(e) {
       var ip;
       if ((ip = input.val()).match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
-        return socket = io.connect(ip);
+        return socket = io.connect("http://" + ip + ":3000");
       } else {
         return errorUl.append(li('not an ip'));
       }

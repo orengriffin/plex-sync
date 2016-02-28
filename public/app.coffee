@@ -11,7 +11,7 @@ $ ->
   input = $('input')
   $('#connect').click (e) ->
     if (ip = input.val()).match /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/
-      socket = io.connect ip
+      socket = io.connect "http://#{ip}:3000"
     else
       errorUl.append li('not an ip')
 
